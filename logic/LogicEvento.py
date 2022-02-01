@@ -55,7 +55,7 @@ def findEvento(id):
         return evento_schema.dump(find(id))
     except Exception as e:
         traceback.print_exc()
-        return str(e),404
+        return str(e),505
 def findUserEventos(id):
     try:
         return eventos_schema.dump(findUser(id))
@@ -107,4 +107,4 @@ def deleteEvento(id):
         return evento_schema.dump(delete(id))
     except Exception as e:
         traceback.print_exc()
-        return str(e),404
+        return str(e),505

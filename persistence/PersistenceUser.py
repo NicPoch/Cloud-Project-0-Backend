@@ -10,26 +10,18 @@ def create(mail,password):
     except Exception as e:
         raise e
 def find(id):
-    user=User.query.get(id)
-    if user==None:
-        raise Exception(f'User doesn\'t exist with id {id}')
+    user=User.query.get_or_404(id)
     return user
 def findByLogin(mail,password):
-    user=User.query.filter_by(mail=mail,password=password).first()
-    if user==None:
-        raise Exception(f'User doesn\'t exist with login')
+    user=User.query.filter_by(mail=mail,password=password).first_or_404()
     return user
 def update(id,password):
-    user=User.query.get(id)
-    if user==None:
-        raise Exception(f'User doesn\'t exist with id {id}')
+    user=User.query.get_or_404(id)
     user.password=password
     db.session.commit()
     return user
 def delete(id):
-    user=User.query.get(id)
-    if user==None:
-        raise Exception(f'User doesn\'t exist with id {id}')
+    user=User.query.get_or_404(id)
     db.session.delete(user)
     db.session.commit()
     return user
