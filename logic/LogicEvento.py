@@ -34,19 +34,20 @@ def createEvento(req):
     if len(req["direccion"])==0:
         return 'empty direccion',404
     try:
-        datetime.strptime(req["inicio"],'%d/%m/%Y')
+        print(req["inicio"])
+        datetime.strptime(req["inicio"],'%Y-%m-%d')
     except:
         return 'Wrong date format inicio',404
     try:
-        datetime.strptime(req["fin"],'%d/%m/%Y')
+        datetime.strptime(req["fin"],'%Y-%m-%d')
     except:
         return 'Wrong date format fin',404
-    if(datetime.strptime(req["inicio"],'%d/%m/%Y')> datetime.strptime(req["fin"],'%d/%m/%Y')):
+    if(datetime.strptime(req["inicio"],'%Y-%m-%d')> datetime.strptime(req["fin"],'%Y-%m-%d')):
         return 'Invaid time',404
     try:
         return evento_schema.dump(create(nombre=req["nombre"],categoria=req["categoria"],
-            lugar=req["lugar"],direccion=req["direccion"],inicio=datetime.strptime(req["inicio"],'%d/%m/%Y'),
-            fin=datetime.strptime(req["fin"],'%d/%m/%Y'),presencial=req["presencial"],creador=req["creador"])) 
+            lugar=req["lugar"],direccion=req["direccion"],inicio=datetime.strptime(req["inicio"],'%Y-%m-%d'),
+            fin=datetime.strptime(req["fin"],'%Y-%m-%d'),presencial=req["presencial"],creador=req["creador"])) 
     except Exception as e:
         traceback.print_exc()
         return str(e),505
@@ -86,19 +87,19 @@ def updateEvento(id,req):
     if len(req["direccion"])==0:
         return 'empty direccion',404
     try:
-        datetime.strptime(req["inicio"],'%d/%m/%Y')
+        datetime.strptime(req["inicio"],'%Y-%m-%d')
     except:
         return 'Wrong date format inicio',404
     try:
-        datetime.strptime(req["fin"],'%d/%m/%Y')
+        datetime.strptime(req["fin"],'%Y-%m-%d')
     except:
         return 'Wrong date format fin',404
-    if(datetime.strptime(req["inicio"],'%d/%m/%Y')> datetime.strptime(req["fin"],'%d/%m/%Y')):
+    if(datetime.strptime(req["inicio"],'%Y-%m-%d')> datetime.strptime(req["fin"],'%Y-%m-%d')): 
         return 'Invaid time',404
     try:
         return evento_schema.dump(update(id,nombre=req["nombre"],categoria=req["categoria"],
-            lugar=req["lugar"],direccion=req["direccion"],inicio=datetime.strptime(req["inicio"],'%d/%m/%Y'),
-            fin=datetime.strptime(req["fin"],'%d/%m/%Y'),presencial=req["presencial"]))
+            lugar=req["lugar"],direccion=req["direccion"],inicio=datetime.strptime(req["inicio"],'%Y-%m-%d'),
+            fin=datetime.strptime(req["fin"],'%Y-%m-%d'),presencial=req["presencial"]))
     except Exception as e:
         traceback.print_exc()
         return str(e),505

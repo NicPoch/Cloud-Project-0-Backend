@@ -11,5 +11,5 @@ class ResourceUser(Resource):
     def delete(self,id):
         return deleteUser(id)
 class ResourceLogin(Resource):
-    def post(self):
+    def post(self): 
         return login(request.json)
